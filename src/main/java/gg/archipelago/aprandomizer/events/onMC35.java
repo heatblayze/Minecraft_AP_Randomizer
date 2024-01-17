@@ -28,16 +28,18 @@ public class onMC35 {
             int randPlayer = ThreadLocalRandom.current().nextInt(APRandomizer.server.getPlayerCount());
             ServerPlayer player = APRandomizer.server.getPlayerList().getPlayers().get(randPlayer);
             CompoundTag eNBT = new CompoundTag();
+            int killCount = 0;
             try {
                 if (event.containsKey("nbt"))
                     eNBT = TagParser.parseTag(event.getString("nbt"));
             } catch (CommandSyntaxException ignored) {
             }
-            // TODO: make configurable
-            if (eNBT.getInt("KillCount") >= 5) {
+            eNBT.putString("id", event.getString("enemy"));
+
+            // TODO: read this from the nbt
+            if (eNBT.getInt("KillCount") > 5) {
                 return;
             }
-            eNBT.putString("id", event.getString("enemy"));
             Entity entity = EntityType.loadEntityRecursive(eNBT, player.level(), (spawnEntity) -> {
                 Vec3 pos = player.position();
                 Vec3 offset = Utils.getRandomPosition(pos, 10);

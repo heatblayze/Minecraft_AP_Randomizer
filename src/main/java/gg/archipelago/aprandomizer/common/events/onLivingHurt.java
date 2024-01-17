@@ -50,8 +50,9 @@ public class onLivingHurt {
             packet.setData(new HashMap<String, Object>() {{
                 put("enemy", name);
                 put("source", APRandomizer.getAP().getSlot());
+                var persistentData = event.getEntity().getPersistentData();
+                persistentData.putInt("KillCount", persistentData.getInt("KillCount") + 1);
                 CompoundTag nbt = event.getEntity().saveWithoutId(new CompoundTag());
-                nbt.putInt("KillCount", nbt.getInt("KillCount") + 1);
                 nbt.remove("UUID");
                 nbt.remove("Motion");
                 nbt.remove("Health");
