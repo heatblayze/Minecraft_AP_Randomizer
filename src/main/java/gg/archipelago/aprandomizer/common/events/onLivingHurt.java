@@ -12,6 +12,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,7 +32,13 @@ public class onLivingHurt {
     @SubscribeEvent
     static void onLivingDeathEvent(LivingDeathEvent event) {
         //TODO: this may be broken.
+        LivingEntity entity = event.getEntity();
         String name = event.getEntity().getEncodeId();
+
+        // TODO: make configurable
+        if (entity instanceof EnderDragon || entity instanceof WitherBoss || entity instanceof Warden) {
+            return;
+        }
 
         if(APRandomizer.isConnected() && !APRandomizer.getAP().getSlotData().MC35)
             return;
