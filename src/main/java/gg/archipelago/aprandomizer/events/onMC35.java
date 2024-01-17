@@ -33,6 +33,10 @@ public class onMC35 {
                     eNBT = TagParser.parseTag(event.getString("nbt"));
             } catch (CommandSyntaxException ignored) {
             }
+            // TODO: make configurable
+            if (eNBT.getInt("KillCount") >= 5) {
+                return;
+            }
             eNBT.putString("id", event.getString("enemy"));
             Entity entity = EntityType.loadEntityRecursive(eNBT, player.level(), (spawnEntity) -> {
                 Vec3 pos = player.position();

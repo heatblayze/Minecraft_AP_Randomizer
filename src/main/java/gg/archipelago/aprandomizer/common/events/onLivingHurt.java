@@ -51,6 +51,7 @@ public class onLivingHurt {
                 put("enemy", name);
                 put("source", APRandomizer.getAP().getSlot());
                 CompoundTag nbt = event.getEntity().saveWithoutId(new CompoundTag());
+                nbt.putInt("KillCount", nbt.getInt("KillCount") + 1);
                 nbt.remove("UUID");
                 nbt.remove("Motion");
                 nbt.remove("Health");
