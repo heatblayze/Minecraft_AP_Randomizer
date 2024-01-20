@@ -36,9 +36,12 @@ public class onMC35 {
             }
             eNBT.putString("id", event.getString("enemy"));
 
-            // TODO: read this from the nbt
-            if (eNBT.getInt("KillCount") > 5) {
-                return;
+            if (eNBT.contains("ForgeData"))
+            {
+                CompoundTag forgeData = eNBT.getCompound("ForgeData");
+                if (forgeData.getInt("KillCount") > 5) {
+                    return;
+                }
             }
             Entity entity = EntityType.loadEntityRecursive(eNBT, player.level(), (spawnEntity) -> {
                 Vec3 pos = player.position();
