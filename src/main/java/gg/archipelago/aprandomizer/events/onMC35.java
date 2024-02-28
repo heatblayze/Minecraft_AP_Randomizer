@@ -28,7 +28,6 @@ public class onMC35 {
             int randPlayer = ThreadLocalRandom.current().nextInt(APRandomizer.server.getPlayerCount());
             ServerPlayer player = APRandomizer.server.getPlayerList().getPlayers().get(randPlayer);
             CompoundTag eNBT = new CompoundTag();
-            int killCount = 0;
             try {
                 if (event.containsKey("nbt"))
                     eNBT = TagParser.parseTag(event.getString("nbt"));
